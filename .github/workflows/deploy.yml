@@ -1,4 +1,4 @@
-name: Deploy para Koyeb via Docker Hub
+name: Deploy para Render via Docker Hub
 
 on:
   push:
@@ -21,9 +21,6 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/monolito-backend:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/monolito-backend:latest
 
-      - name: Deploy no Koyeb
+      - name: Notificar Render (Opcional)
         run: |
-          curl -X POST "https://app.koyeb.com/v1/services/${{ secrets.KOYEB_APP_NAME }}/deployments" \
-          -H "Authorization: Bearer ${{ secrets.KOYEB_API_KEY }}" \
-          -H "Content-Type: application/json" \
-          -d '{}'
+          echo "A imagem Docker foi atualizada no Docker Hub. Certifique-se de que o Render está configurado corretamente para puxar a imagem mais recente."
