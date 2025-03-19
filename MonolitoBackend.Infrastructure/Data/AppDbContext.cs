@@ -1,19 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using MonolitoBackend.Core.Entities;
 
-namespace MonolitoBackend.Infrastructure.Data
+namespace MonolitoBackend.Infrastructure.Data;
+
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public class AppDbContext : DbContext
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Genre> Genres { get; set; }
+    public DbSet<User> Users { get; set; }
+
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
-
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Genre> Genres { get; set; }
-        public DbSet<User> Users { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
+        base.OnModelCreating(modelBuilder);
     }
 }
